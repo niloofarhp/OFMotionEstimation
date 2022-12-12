@@ -62,18 +62,20 @@ example = next(train_iter)
 
 # minv, maxv = example["metadata"]["backward_flow_range"]
 # backward_flow = example["backward_flow"] / 65535 * (maxv - minv) + minv
-
-minv, maxv = example["metadata"]["depth_range"]
-depth = example["depth"] / 65535 * (maxv - minv) + minv
-with media.set_show_save_dir('/Users/niloofar/Documents/Projects/Video_OF/videoData/'):
-    media.show_videos({#"rgb": example["video"], 
-                       #"normal": example["normal"],
-                       #"forward_flow": flow_to_rgb(forward_flow, white_bg=False),
-                       "backward_flow": flow_to_rgb(backward_flow, white_bg=False),
-                       "object_coordinates": example["object_coordinates"], 
-                    },
-                    fps=12,)
-                    #columns=4,
-                    #title='videoF',)
+count = 10
+while count > 0:
+  example = next(train_iter)
+  minv, maxv = example["metadata"]["depth_range"]
+  depth = example["depth"] / 65535 * (maxv - minv) + minv
+  with media.set_show_save_dir('/Users/niloofar/Documents/Projects/Video_OF/videoData/'):
+      media.show_videos({"rgb": example["video"], 
+                        #"normal": example["normal"],
+                        #"forward_flow": flow_to_rgb(forward_flow, white_bg=False),
+                        #"backward_flow": flow_to_rgb(backward_flow, white_bg=False),
+                        #"object_coordinates": example["object_coordinates"], 
+                      },
+                      fps=12,)
+                      #columns=4,
+                      #title='videoF',)
     
   
